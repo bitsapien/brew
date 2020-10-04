@@ -31,12 +31,20 @@ module Homebrew
 
   def uninstall
     args = uninstall_args.parse
+    uninstall_cmd(
+      named: args.named,
+      force: args.forced?,
+      ignore_dependencies: args.ignore_dependencies?,
+      verbose: args.verbose?
+    )
+  end
 
-    if args.force?
+  def uninstall_cmd(named: [], force: false, ignore_dependencies: false, verbose: false)
+    if force
       casks = []
       kegs_by_rack = {}
 
-      args.named.each do |name|
+      named.each do |name|
         rack = Formulary.to_rack(name)
 
         if rack.directory?
@@ -50,17 +58,17 @@ module Homebrew
         end
       end
     else
-      all_kegs, casks = args.named.to_kegs_to_casks
+      all_kegs, casks = named.to_kegs_to_casks
       kegs_by_rack = all_kegs.group_by(&:rack)
     end
 
     handle_unsatisfied_dependents(kegs_by_rack,
-                                  ignore_dependencies: args.ignore_dependencies?,
-                                  named_args:          args.named)
+                                  ignore_dependencies: ignore_dependencies,
+                                  named_args:          named)
     return if Homebrew.failed?
 
     kegs_by_rack.each do |rack, kegs|
-      if args.force?
+      if force
         name = rack.basename
 
         if rack.directory?
@@ -130,8 +138,8 @@ module Homebrew
     Cask::Cmd::Uninstall.uninstall_casks(
       *casks,
       binaries: EnvConfig.cask_opts_binaries?,
-      verbose:  args.verbose?,
-      force:    args.force?,
+      verbose:  verbose,
+      force:    force,
     )
   rescue MultipleVersionsInstalledError => e
     ofail e

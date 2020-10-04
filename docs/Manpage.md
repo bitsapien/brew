@@ -56,64 +56,71 @@ Turn Homebrew's analytics on or off respectively.
 `brew analytics regenerate-uuid`:
 Regenerate the UUID used for Homebrew's analytics.
 
+### `autoremove` [*`options`*]
+
+Remove packages that weren't installed on request and are no longer needed.
+
+* `-n`, `--dry-run`:
+  Just print what would be removed.
+
 ### `cask` *`command`* [*`options`*] [*`cask`*]
 
 Homebrew Cask provides a friendly CLI workflow for the administration of macOS applications distributed as binaries.
 
 Commands:
 
-- `--cache`  
+- `--cache`
   Display the file used to cache a *`cask`*
 
-- `audit`  
+- `audit`
   Check *`cask`* for Homebrew coding style violations
 
-- `cat`  
+- `cat`
   Dump raw source of a *`cask`* to the standard output
 
-- `create`  
+- `create`
   Creates the given *`cask`* and opens it in an editor
 
-- `doctor`  
+- `doctor`
   Checks for configuration issues
 
-- `edit`  
+- `edit`
   Open the given *`cask`* for editing
 
-- `fetch`  
+- `fetch`
   Downloads remote application files to local cache
 
-- `help`  
+- `help`
   Print help for `cask` commands
 
-- `home`  
+- `home`
   Opens the homepage of the given *`cask`*
 
-- `info`  
+- `info`
   Displays information about the given *`cask`*
 
-- `install`  
+- `install`
   Installs the given *`cask`*
 
-- `list`  
+- `list`
   Lists installed casks or the casks provided in the arguments
 
-- `outdated`  
+- `outdated`
   List the outdated installed casks
 
-- `reinstall`  
+- `reinstall`
   Reinstalls the given *`cask`*
 
-- `style`  
+- `style`
   Checks style of the given *`cask`* using RuboCop
 
-- `uninstall`  
+- `uninstall`
   Uninstalls the given *`cask`*
 
-- `upgrade`  
+- `upgrade`
   Upgrades all outdated casks or the specified casks
 
-- `zap`  
+- `zap`
   Zaps all files associated with the given *`cask`*
 
 See also: `man brew`
@@ -436,7 +443,7 @@ information is displayed in interactive shells, and suppressed otherwise.
 * `--cask`:
   Only output outdated casks.
 * `--json`:
-  Print output in JSON format. There are two versions: v1 and v2. v1 is deprecated and is currently the default if no version is specified. v2 prints outdated formulae and casks. 
+  Print output in JSON format. There are two versions: v1 and v2. v1 is deprecated and is currently the default if no version is specified. v2 prints outdated formulae and casks.
 * `--fetch-HEAD`:
   Fetch the upstream repository to detect if the HEAD installation of the formula is outdated. Otherwise, the repository's HEAD will only be checked for updates when a new stable or development version has been released.
 * `--greedy`:

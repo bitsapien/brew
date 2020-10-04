@@ -20,12 +20,15 @@ module Homebrew
     end
   end
 
-  def leaves
+  def leaves_list
     leaves_args.parse
 
     installed = Formula.installed.sort
     deps_of_installed = installed.flat_map(&:runtime_formula_dependencies)
-    leaves = installed.map(&:full_name) - deps_of_installed.map(&:full_name)
-    leaves.each(&method(:puts))
+    installed.map(&:full_name) - deps_of_installed.map(&:full_name)
+  end
+
+  def leaves
+    leaves_list.each(&method(:puts))
   end
 end
